@@ -26,3 +26,16 @@ int frogJump(int n, vector<int> &jumps){
     }
     return dp[n-1];
 }
+
+// Space Optimization
+int frogJump(int n, vector<int> &jumps){
+    if(n==1) return 0;
+    int a = 0, b = abs(jumps[1] - jumps[0]);
+    for(int i = 2; i < n; i++){
+        int fs = b + abs(jumps[i] - jumps[i-1]);
+        int ss = a + abs(jumps[i] - jumps[i-2]);
+        a = b;
+        b = min(fs, ss);
+    }
+    return b;
+}
